@@ -245,8 +245,7 @@
                                 <p><b>Free</b> Website SEO Score by Email</p>
 
                                 <!-- ✅ Netlify Form -->
-                                <form id="seoForm" name="seoForm" method="POST" data-netlify="true" action="."
-                                    onsubmit="handleSEOForm(event)">
+                                <form name="seoForm" method="POST" data-netlify="true" onsubmit="handleSEOForm(event)">
                                     <!-- Hidden input for Netlify -->
                                     <input type="hidden" name="form-name" value="seoForm" />
 
@@ -259,12 +258,18 @@
                                 </form>
 
                                 <!-- ✅ Success & Error Messages -->
-                                <p id="seoSuccessMessage" style="display: none; margin-top: 10px;">
+                                <p id="seoSuccessMessage" style="display: none; margin-top: 10px; color: white">
                                     ✅ Thank You! We’ll Get Back to You Soon.
                                 </p>
-                                <p class="fs-4" id="seoErrorMessage" style="display: none; margin-top: 10px;">
+                                <p id="seoErrorMessage" style="display: none; margin-top: 10px; color: #ffb3b3">
                                     ❌ Something went wrong. Please try again.
                                 </p>
+
+                                <!-- ✅ Hidden static fallback form (required for detection) -->
+                                <form name="seoForm" netlify hidden>
+                                    <input type="text" name="website" />
+                                    <input type="email" name="email" />
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -278,7 +283,7 @@
         async function handleSEOForm(event) {
             event.preventDefault();
 
-            const form = document.getElementById("seoForm");
+            const form = event.target;
             const successMsg = document.getElementById("seoSuccessMessage");
             const errorMsg = document.getElementById("seoErrorMessage");
             const submitBtn = document.getElementById("seoSubmitBtn");
@@ -292,7 +297,6 @@
                 submitBtn.disabled = true;
                 submitBtn.textContent = "Submitting...";
 
-                // Send form data to Netlify (works only after deploy)
                 const response = await fetch("/", {
                     method: "POST",
                     headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -302,20 +306,21 @@
                 if (response.ok) {
                     successMsg.style.display = "block";
                     form.reset();
-                    setTimeout(() => (successMsg.style.display = "none"), 2000);
+                    setTimeout(() => (successMsg.style.display = "none"), 2500);
                 } else {
                     throw new Error("Submission failed");
                 }
             } catch (error) {
                 console.error("SEO form error:", error);
                 errorMsg.style.display = "block";
-                setTimeout(() => (errorMsg.style.display = "none"), 2000);
+                setTimeout(() => (errorMsg.style.display = "none"), 2500);
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = "Subscribe";
             }
         }
     </script>
+
 
 
     <!-- About Start -->
@@ -680,7 +685,7 @@
                 <div class="col-md-6">
                     <div class="snapshot-card animate-left">
                         <!-- <div class="icon">🔄</div> -->
-                         <p class="display-3">🔄</p>
+                        <p class="display-3">🔄</p>
                         <p class="fs-5">Repeat clients across industries</p>
                     </div>
                 </div>
