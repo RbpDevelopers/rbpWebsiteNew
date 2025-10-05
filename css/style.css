@@ -508,6 +508,15 @@
 
 
 /*** Project ***/
+.bg-img {
+  background: url("../img/backgroung-img.jpg") no-repeat center center;
+  background-size: cover;       /* makes the image scale to cover */
+  background-attachment: fixed; /* optional: creates a parallax effect */
+  width: 100%;
+  min-height: 100vh;            /* ensures full screen height */
+  display: flex;                /* centers inner content if needed */
+  align-items: center;          /* vertical centering */
+}
 .hello{
     height: 258px;
     width: 200px;

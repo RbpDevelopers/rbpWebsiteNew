@@ -503,7 +503,7 @@
         <h2>Built for Results. Backed by Strategy.</h2>
     </div>
 
-    <div class="container-xxl py-5">
+    <div class="container-xxl py-5 bg-img">
         <div class="container">
             <div class="row g-4 justify-content-center">
 
@@ -685,27 +685,27 @@
                 <div class="col-md-6">
                     <div class="snapshot-card animate-left">
                         <!-- <div class="icon">🔄</div> -->
-                        <p class="display-3">🔄</p>
+                        <p class="display-5">🔄</p>
                         <p class="fs-5">Repeat clients across industries</p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="snapshot-card animate-right">
-                        <p class="display-3">📣</p>
+                        <p class="display-5">📣</p>
                         <p class="fs-5">Campaigns that led to real business outcomes</p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="snapshot-card animate-left">
                         <!-- <div class="icon">💬</div> -->
-                        <p class="display-3">💬</p>
+                        <p class="display-5">💬</p>
                         <p class="fs-5">5-star client feedback on clarity, quality, and consistency</p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="snapshot-card animate-right">
                         <!-- <div class="icon">🛠️</div> -->
-                        <p class="display-3">🛠️</p>
+                        <p class="display-5">🛠️</p>
                         <p class="fs-5">Growth projects launched across performance, SEO, and content</p>
                     </div>
                 </div>
@@ -798,10 +798,10 @@
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
                     <h2 class="mb-4">Get A Free Quote</h2>
 
-                    <!-- ✅ Netlify form setup -->
-                    <form id="quoteForm" name="quoteForm" method="POST" data-netlify="true" action="."
+                    <!-- ✅ Netlify Form Setup -->
+                    <form id="quoteForm" name="quoteForm" method="POST" data-netlify="true"
                         onsubmit="handleQuoteForm(event)">
-                        <!-- Hidden input to identify form on Netlify -->
+                        <!-- Hidden input for Netlify -->
                         <input type="hidden" name="form-name" value="quoteForm" />
 
                         <div class="row g-3">
@@ -855,6 +855,7 @@
                                 <button class="btn bg-darkblue w-100 py-3" type="submit" id="submitBtn">
                                     Submit Now
                                 </button>
+
                                 <p id="successMessage"
                                     style="display: none; color: green; margin-top: 10px; font-weight: 500;">
                                     ✅ Submitted Successfully!
@@ -866,8 +867,18 @@
                             </div>
                         </div>
                     </form>
+
+                    <!-- ✅ Hidden fallback form for Netlify detection -->
+                    <form name="quoteForm" netlify hidden>
+                        <input type="text" name="name" />
+                        <input type="email" name="mail" />
+                        <input type="number" name="mobile" />
+                        <input type="text" name="service" />
+                        <textarea name="message"></textarea>
+                    </form>
                 </div>
 
+                <!-- ✅ Script -->
                 <script>
                     async function handleQuoteForm(event) {
                         event.preventDefault();
@@ -877,18 +888,16 @@
                         const errorMsg = document.getElementById("errorMessage");
                         const submitBtn = document.getElementById("submitBtn");
 
-                        // Hide previous messages
+                        // Hide old messages
                         successMsg.style.display = "none";
                         errorMsg.style.display = "none";
 
-                        // Prepare form data
                         const formData = new FormData(form);
 
                         try {
                             submitBtn.disabled = true;
                             submitBtn.textContent = "Submitting...";
 
-                            // Send data to Netlify
                             const response = await fetch("/", {
                                 method: "POST",
                                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -898,20 +907,21 @@
                             if (response.ok) {
                                 successMsg.style.display = "block";
                                 form.reset();
-                                setTimeout(() => (successMsg.style.display = "none"), 3000);
+                                setTimeout(() => (successMsg.style.display = "none"), 2500);
                             } else {
-                                throw new Error("Network response was not ok");
+                                throw new Error("Submission failed");
                             }
                         } catch (error) {
-                            console.error("Form submission failed:", error);
+                            console.error("Quote form error:", error);
                             errorMsg.style.display = "block";
-                            setTimeout(() => (errorMsg.style.display = "none"), 2000);
+                            setTimeout(() => (errorMsg.style.display = "none"), 2500);
                         } finally {
                             submitBtn.disabled = false;
                             submitBtn.textContent = "Submit Now";
                         }
                     }
                 </script>
+
 
 
             </div>
