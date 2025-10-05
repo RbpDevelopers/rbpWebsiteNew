@@ -3,13 +3,15 @@
 
 <head>
     <meta charset="utf-8">
-    <title>GrowMark - Digital Marketing HTML Template</title>
+    <title>RBP Digital 360 | Digital Marketing That Drives Growth</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
-    <meta content="" name="description">
+    <meta
+        content="RBP Digital 360 is a creative and strategy-first digital marketing agency offering services in performance ads, SEO, social media, and web design. Trusted by real brands."
+        name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="img/rbp logo final.png" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -109,15 +111,15 @@
                             </div>
                         </div>
 
-                        <a href="about.html" class="nav-item nav-link">About Us</a>
-                        <a href="blog.html" class="nav-item nav-link">Blog</a>
-                        <a href="careers.html" class="nav-item nav-link">Careers</a>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="#" class="nav-item nav-link">About Us</a>
+                        <a href="#" class="nav-item nav-link">Blog</a>
+                        <a href="#" class="nav-item nav-link">Careers</a>
+                        <a href="#" class="nav-item nav-link">Contact</a>
                     </div>
 
                     <!-- Right-side Button -->
                     <div class="ms-lg-auto mt-3 mt-lg-0">
-                        <a href="strategy-call.html" class="btn bg-darkblue rounded-pill py-3 px-4">
+                        <a href="#" class="btn bg-darkblue rounded-pill py-3 px-4">
                             Book a free strategy call
                         </a>
                     </div>
@@ -232,7 +234,7 @@
             }
         }
     </style>
-    <!-- subscribe SEO Search -->
+    <!-- ✅ SEO Subscribe Section -->
     <div id="subscribe" class="subscribe mt-2">
         <div class="container">
             <div class="row">
@@ -241,13 +243,28 @@
                         <div class="row">
                             <div class="col-lg-10 offset-lg-1">
                                 <p><b>Free</b> Website SEO Score by Email</p>
-                                <form id="subscribe" action="" method="get">
+
+                                <!-- ✅ Netlify Form -->
+                                <form id="seoForm" name="seoForm" method="POST" data-netlify="true" action="."
+                                    onsubmit="handleSEOForm(event)">
+                                    <!-- Hidden input for Netlify -->
+                                    <input type="hidden" name="form-name" value="seoForm" />
+
                                     <input type="text" name="website" id="website" placeholder="Your Website URL"
-                                        required="">
-                                    <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*"
-                                        placeholder="Your Email" required="">
-                                    <button type="submit" id="form-submit" class="main-button ">Subscribe</button>
+                                        required />
+                                    <input type="email" name="email" id="email" placeholder="Your Email" required />
+                                    <button type="submit" id="seoSubmitBtn" class="main-button">
+                                        Subscribe
+                                    </button>
                                 </form>
+
+                                <!-- ✅ Success & Error Messages -->
+                                <p id="seoSuccessMessage" style="display: none; margin-top: 10px;">
+                                    ✅ Thank You! We’ll Get Back to You Soon.
+                                </p>
+                                <p class="fs-4" id="seoErrorMessage" style="display: none; margin-top: 10px;">
+                                    ❌ Something went wrong. Please try again.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -255,7 +272,51 @@
             </div>
         </div>
     </div>
-    <!-- END-subscribe SEO Search -->
+
+    <!-- ✅ Script -->
+    <script>
+        async function handleSEOForm(event) {
+            event.preventDefault();
+
+            const form = document.getElementById("seoForm");
+            const successMsg = document.getElementById("seoSuccessMessage");
+            const errorMsg = document.getElementById("seoErrorMessage");
+            const submitBtn = document.getElementById("seoSubmitBtn");
+
+            successMsg.style.display = "none";
+            errorMsg.style.display = "none";
+
+            const formData = new FormData(form);
+
+            try {
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Submitting...";
+
+                // Send form data to Netlify (works only after deploy)
+                const response = await fetch("/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: new URLSearchParams(formData).toString(),
+                });
+
+                if (response.ok) {
+                    successMsg.style.display = "block";
+                    form.reset();
+                    setTimeout(() => (successMsg.style.display = "none"), 2000);
+                } else {
+                    throw new Error("Submission failed");
+                }
+            } catch (error) {
+                console.error("SEO form error:", error);
+                errorMsg.style.display = "block";
+                setTimeout(() => (errorMsg.style.display = "none"), 2000);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Subscribe";
+            }
+        }
+    </script>
+
 
     <!-- About Start -->
     <div class="container-xxl about my-5">
@@ -618,26 +679,29 @@
             <div class="row g-4 mt-4">
                 <div class="col-md-6">
                     <div class="snapshot-card animate-left">
-                        <div class="icon">🔄</div>
-                        <h5>Repeat clients across industries</h5>
+                        <!-- <div class="icon">🔄</div> -->
+                         <p class="display-3">🔄</p>
+                        <p class="fs-5">Repeat clients across industries</p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="snapshot-card animate-right">
-                        <div class="icon">📣</div>
-                        <h5>Campaigns that led to real business outcomes</h5>
+                        <p class="display-3">📣</p>
+                        <p class="fs-5">Campaigns that led to real business outcomes</p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="snapshot-card animate-left">
-                        <div class="icon">💬</div>
-                        <h5>5-star client feedback on clarity, quality, and consistency</h5>
+                        <!-- <div class="icon">💬</div> -->
+                        <p class="display-3">💬</p>
+                        <p class="fs-5">5-star client feedback on clarity, quality, and consistency</p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="snapshot-card animate-right">
-                        <div class="icon">🛠️</div>
-                        <h5>Growth projects launched across performance, SEO, and content</h5>
+                        <!-- <div class="icon">🛠️</div> -->
+                        <p class="display-3">🛠️</p>
+                        <p class="fs-5">Growth projects launched across performance, SEO, and content</p>
                     </div>
                 </div>
             </div>
@@ -659,21 +723,21 @@
             </div>
             <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
                 <div class="testimonial-item rounded p-4 p-lg-5 mb-5">
-                    <img class="mb-4" src="img/testimonial-1.jpg" alt="">
+                    <img class="mb-4" src="img/male-icon-symbol-logo-vector_636116-415.jpg" alt="">
                     <p class="mb-4">"RBP Digital 360 helped us 5x our leads in 2 months. Their ideas, responsiveness,
                         and execution were spot on."</p>
                     <h5>NIDA College</h5>
                     <span class="text-primary">– Marketing Head</span>
                 </div>
                 <div class="testimonial-item rounded p-4 p-lg-5 mb-5">
-                    <img class="mb-4" src="img/testimonial-2.jpg" alt="">
+                    <img class="mb-4" src="img/male-icon-symbol-logo-vector_636116-415.jpg" alt="">
                     <p class="mb-4">"From branding to performance ads, they handled everything like an extended part of
                         our team."</p>
                     <h5>SLF Organic</h5>
                     <span class="text-primary">– Director</span>
                 </div>
                 <div class="testimonial-item rounded p-4 p-lg-5 mb-5">
-                    <img class="mb-4" src="img/testimonial-3.jpg" alt="">
+                    <img class="mb-4" src="img/male-icon-symbol-logo-vector_636116-415.jpg" alt="">
                     <p class="mb-4">"We didn’t know where to begin — they brought structure, strategy, and visibility to
                         our business."</p>
                     <h5>PINAK Express</h5>
@@ -700,7 +764,7 @@
             </p>
 
             <div class="d-flex justify-content-center gap-3 flex-wrap">
-                <a href="strategy-call.html" class="btn btn-primary btn-lg rounded-pill px-4 animate-left">
+                <a href="strategy-call.html" class="btn bg-darkblue btn-lg rounded-pill px-4 animate-left">
                     Book a Free Strategy Call
                 </a>
                 <a href="contact.html" class="btn btn-outline-primary btn-lg rounded-pill px-4 animate-right">
@@ -715,69 +779,142 @@
         <div class="container">
             <div class="row g-5">
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <p class="fs-5 fw-medium text-darkblue">Let’s Talk Growth</p>
-                    <h3 class="mb-4">Whether you have a specific project in mind or just want to explore ideas
-                        — we’d love to connect. Fill out the form, drop us an email, or schedule a discovery call.</h3>
-                    <p class="fs-4">We're here to listen, brainstorm, and help you build what’s next.</p>
-                    <a class="d-inline-flex align-items-center rounded overflow-hidden border border-primary" href="">
-                        <span class="btn-lg-square bg-primary" style="width: 55px; height: 55px;">
+                    <p class="fs-2 fw-medium text-darkblue">Let’s Talk Growth</p>
+                    <h5 class="mb-4">Whether you have a specific project in mind or just want to explore ideas
+                        — we’d love to connect. Fill out the form, drop us an email, or schedule a discovery call.</h5>
+                    <p class="fs-5">We're here to listen, brainstorm, and help you build what’s next.</p>
+                    <a class="d-inline-flex align-items-center rounded overflow-hidden border border-darkblue" href="">
+                        <span class="btn-lg-square bg-darkblue" style="width: 55px; height: 55px;">
                             <i class="fa fa-phone-alt text-white"></i>
                         </span>
-                        <span class="fs-5 fw-medium mx-4">+91 7002829006</span>
+                        <span class="fs-5 text-darkblue fw-medium mx-4">+91 7002829006</span>
                     </a>
                 </div>
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
                     <h2 class="mb-4">Get A Free Quote</h2>
-                    <div class="row g-3">
-                        <div class="col-sm-6">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="name" placeholder="Your Name">
-                                <label for="name">Your Name</label>
+
+                    <!-- ✅ Netlify form setup -->
+                    <form id="quoteForm" name="quoteForm" method="POST" data-netlify="true" action="."
+                        onsubmit="handleQuoteForm(event)">
+                        <!-- Hidden input to identify form on Netlify -->
+                        <input type="hidden" name="form-name" value="quoteForm" />
+
+                        <div class="row g-3">
+                            <div class="col-sm-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="name" name="name"
+                                        placeholder="Your Name" required />
+                                    <label for="name">Your Name</label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="mail" name="mail"
+                                        placeholder="Your Email" required />
+                                    <label for="mail">Your Email</label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-floating">
+                                    <input type="number" class="form-control" id="mobile" name="mobile"
+                                        placeholder="Your Mobile" required />
+                                    <label for="mobile">Your Mobile</label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-floating">
+                                    <select class="form-select" id="service" name="service" required>
+                                        <option value="Ads" selected>Ads</option>
+                                        <option value="Website">Website</option>
+                                        <option value="SEO">SEO</option>
+                                        <option value="Branding">Branding</option>
+                                        <option value="Consulting">Consulting</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                    <label for="service">How We Can Help You?</label>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Leave a message here" id="message"
+                                        name="message" style="height: 130px" required></textarea>
+                                    <label for="message">Brief Description / Goals</label>
+                                </div>
+                            </div>
+
+                            <div class="col-12 text-center">
+                                <button class="btn bg-darkblue w-100 py-3" type="submit" id="submitBtn">
+                                    Submit Now
+                                </button>
+                                <p id="successMessage"
+                                    style="display: none; color: green; margin-top: 10px; font-weight: 500;">
+                                    ✅ Submitted Successfully!
+                                </p>
+                                <p id="errorMessage"
+                                    style="display: none; color: red; margin-top: 10px; font-weight: 500;">
+                                    ❌ Something went wrong. Please try again.
+                                </p>
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-floating">
-                                <input type="email" class="form-control" id="mail" placeholder="Your Email">
-                                <label for="mail">Your Email</label>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="mobile" placeholder="Your Mobile">
-                                <label for="mobile">Your Mobile</label>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-floating">
-                                <select class="form-select" id="service">
-                                    <option selected>Ads</option>
-                                    <option value="">Webstie</option>
-                                    <option value="">SEO</option>
-                                    <option value="">Branding</option>
-                                    <option value="">Consulting</option>
-                                    <option value="">Others</option>
-                                </select>
-                                <label for="service">How We Can Help You?</label>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-floating">
-                                <textarea class="form-control" placeholder="Leave a message here" id="message"
-                                    style="height: 130px"></textarea>
-                                <label for="message">Brief Description / Goals</label>
-                            </div>
-                        </div>
-                        <div class="col-12 text-center">
-                            <button class="btn btn-primary w-100 py-3" type="submit">Submit Now</button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
+
+                <script>
+                    async function handleQuoteForm(event) {
+                        event.preventDefault();
+
+                        const form = document.getElementById("quoteForm");
+                        const successMsg = document.getElementById("successMessage");
+                        const errorMsg = document.getElementById("errorMessage");
+                        const submitBtn = document.getElementById("submitBtn");
+
+                        // Hide previous messages
+                        successMsg.style.display = "none";
+                        errorMsg.style.display = "none";
+
+                        // Prepare form data
+                        const formData = new FormData(form);
+
+                        try {
+                            submitBtn.disabled = true;
+                            submitBtn.textContent = "Submitting...";
+
+                            // Send data to Netlify
+                            const response = await fetch("/", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                                body: new URLSearchParams(formData).toString(),
+                            });
+
+                            if (response.ok) {
+                                successMsg.style.display = "block";
+                                form.reset();
+                                setTimeout(() => (successMsg.style.display = "none"), 3000);
+                            } else {
+                                throw new Error("Network response was not ok");
+                            }
+                        } catch (error) {
+                            console.error("Form submission failed:", error);
+                            errorMsg.style.display = "block";
+                            setTimeout(() => (errorMsg.style.display = "none"), 2000);
+                        } finally {
+                            submitBtn.disabled = false;
+                            submitBtn.textContent = "Submit Now";
+                        }
+                    }
+                </script>
+
+
             </div>
         </div>
     </div>
     <!-- Footer Start -->
     <div class="container-fluid bg-lightblue footer mt-5 py-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="container py-5">
+        <div class="container py-1">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <p class="text-white mb-4">RBP Digital 360 is a digital growth agency helping businesses scale
@@ -786,13 +923,13 @@
                     <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 7002829006</p>
                     <p class="mb-2"><i class="fa fa-envelope me-3"></i>rbpdigital360@gmail.com</p>
                     <div class="d-flex pt-3">
-                        <a class="btn btn-square btn-light rounded-circle me-2" href=""><i
+                        <a class="btn btn-square btn-light text-darkblue rounded-circle me-2" href=""><i
                                 class="fab fa-twitter"></i></a>
-                        <a class="btn btn-square btn-light rounded-circle me-2" href=""><i
+                        <a class="btn btn-square btn-light text-darkblue rounded-circle me-2" href=""><i
                                 class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-square btn-light rounded-circle me-2" href=""><i
+                        <a class="btn btn-square btn-light text-darkblue rounded-circle me-2" href=""><i
                                 class="fab fa-youtube"></i></a>
-                        <a class="btn btn-square btn-light rounded-circle me-2" href=""><i
+                        <a class="btn btn-square btn-light text-darkblue rounded-circle me-2" href=""><i
                                 class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
@@ -844,7 +981,8 @@
         <div class="container">
             <div class="row">
                 <div class="d-flex justify-content-between text-center text-md-start mb-3 mb-md-0">
-                     <div>&copy;<a class="fw-medium text-light" href="#">2025 RBP Digital 360</a>, All Right Reserved.</div>
+                    <div>&copy;<a class="fw-medium text-light" href="#">2025 RBP Digital 360</a>, All Right Reserved.
+                    </div>
                     <p>Privacy Policy | Terms of Use</p>
                 </div>
             </div>

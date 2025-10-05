@@ -3064,7 +3064,7 @@ textarea.form-control.is-invalid {
 }
 
 .btn:hover {
-    color: #555
+    color: white
 }
 
 .btn-check:focus+.btn,
